@@ -1,0 +1,34 @@
+<section>
+    <app-header></app-header>
+</section>
+<div class="container mt-5">
+    <div *ngIf="load === false">
+        <div class="row mb-5">
+            <div class="mb-3 col-md-11">
+                <input type="text" class="form-control" id="newJob" placeholder="Adicione uma nova tarefa" [(ngModel)]="name">
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-success" (click)="postItem(name)">Adicionar</button>
+            </div>
+        </div>
+        <div class="list-group" *ngFor="let tarefa of todoList">
+            <div class="row">
+                <div class="col-md-11">
+                    <a href="#" class="list-group-item list-group-item-action" (click)="setStatus(tarefa.id, tarefa.status)">
+                        <input type="checkbox" class="mt-0 mb-0 m-2" [(ngModel)]="tarefa.status" (change)="updateItem(tarefa.id, tarefa.status)" /> {{tarefa.name}}
+                    </a>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-danger" (click)="deleteItem(tarefa.id)">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center mt-5" style="height: 300px; width: 100%;">
+        <div class="col-1 justify-content-center mt-5">
+            <div class="spinner-grow text-primary" role="status" style="width: 3rem; height: 3rem;" *ngIf="load === true">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>
